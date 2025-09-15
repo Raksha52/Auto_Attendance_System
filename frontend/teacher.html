@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teacher - Auto Attendance</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="appbar">
+        <div class="brand"><img src="./logo.svg" alt="Auto Attendance" /></div>
+        <nav>
+          <ul>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="card">
+        <div class="section-title"><h3>Teacher Portal</h3><span class="pill">UI</span></div>
+        <p class="muted">Placeholder: start session and view matches.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Session</h4>
+            <div style="display:flex; gap:.5rem">
+              <button class="button" disabled>Start Session</button>
+              <button class="button" disabled>Stop Session</button>
+            </div>
+          </div>
+          <div class="card">
+            <h4>Matches</h4>
+            <button class="button" disabled>View</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module">
+      import { TeacherPage } from './app-shared.js';
+      new TeacherPage().init();
+    </script>
+  </body>
+</html>
+
+

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<article>
+  <h3>Teacher Portal</h3>
+  {% if session %}
+    <p>Active session #{{ session.id }} started at {{ session.started_at }}</p>
+    <button id="stopBtn">Stop Session</button>
+  {% else %}
+    <button id="startBtn">Start Session</button>
+  {% endif %}
+
+  <section>
+    <h4>Webcam</h4>
+    <video id="video" autoplay playsinline width="640" height="480"></video>
+    <canvas id="canvas" width="640" height="480" style="display:none"></canvas>
+  </section>
+
+  <section>
+    <h4>Matches</h4>
+    <ul id="matches"></ul>
+  </section>
+</article>
+
+<script>
+async function post(url, formData) {
+  const res = await fetch(url, { method: 'POST', body: formData });
+  return await res.json();
+}
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const matchesEl = document.getElementById('matches');
+
+async function initCam(){
+  try{
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+    video.srcObject = stream;
+  }catch(e){ console.error(e); }
+}
+
+async function sendFrame(){
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const blob = await new Promise(r => canvas.toBlob(r, 'image/jpeg', 0.8));
+  const fd = new FormData();
+  fd.append('frame', blob, 'frame.jpg');
+  try{
+    const data = await post('/teacher/frame', fd);
+    if (data.ok) {
+      matchesEl.innerHTML = '';
+      for (const m of data.matches) {
+        const li = document.createElement('li');
+        li.textContent = `${m.name} (${m.student_id}) dist=${m.distance.toFixed(3)}`;
+        matchesEl.appendChild(li);
+      }
+    }
+  }catch(e){ console.error(e); }
+}
+
+let frameInterval;
+function startSending(){
+  if (frameInterval) return;
+  frameInterval = setInterval(sendFrame, 1500);
+}
+function stopSending(){
+  if (frameInterval) { clearInterval(frameInterval); frameInterval = null; }
+}
+
+document.getElementById('startBtn')?.addEventListener('click', async () => {
+  const fd = new FormData();
+  const res = await post('/teacher/start', fd);
+  if (res.ok) { location.reload(); }
+});
+document.getElementById('stopBtn')?.addEventListener('click', async () => {
+  const fd = new FormData();
+  const res = await post('/teacher/stop', fd);
+  if (res.ok) { stopSending(); location.reload(); }
+});
+
+initCam();
+startSending();
+</script>
+{% endblock %}
+

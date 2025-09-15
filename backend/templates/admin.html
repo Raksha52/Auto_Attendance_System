@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<article>
+  <h3>Admin</h3>
+  <details open>
+    <summary>Create User</summary>
+    <form method="post" action="/admin/create-user">
+      <label>Name <input name="name" required /></label>
+      <label>Email <input name="email" type="email" /></label>
+      <label>Student ID <input name="student_id" /></label>
+      <label>Role
+        <select name="role">
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+      </label>
+      <label>Password <input name="password" type="password" /></label>
+      <button type="submit">Create</button>
+    </form>
+  </details>
+
+  <h4>Users</h4>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Role</th><th>StudentID</th><th>Email</th><th>Enroll Face</th></tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.name }}</td>
+        <td>{{ u.role }}</td>
+        <td>{{ u.student_id or '' }}</td>
+        <td>{{ u.email or '' }}</td>
+        <td>
+          <form method="post" action="/admin/enroll-face/{{ u.id }}" enctype="multipart/form-data">
+            <input type="file" name="photo" accept="image/*" required />
+            <button type="submit">Add Face</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+{% endblock %}
+
+

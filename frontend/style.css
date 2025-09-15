@@ -1,0 +1,54 @@
+:root{
+  --brand:#2563eb;
+  --brand-2:#1e40af;
+  --ok:#16a34a;
+  --warn:#f59e0b;
+  --danger:#dc2626;
+}
+
+body{ background:#0b1020; color:#e6e9f0; }
+body { background-image: radial-gradient(1000px 600px at -10% -10%, rgba(37,99,235,.15), transparent 60%), radial-gradient(800px 500px at 110% -10%, rgba(56,189,248,.12), transparent 60%), radial-gradient(900px 600px at 50% 120%, rgba(99,102,241,.12), transparent 60%); }
+main.container{ max-width:980px; }
+
+header.appbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.75rem 0; margin-bottom:1rem;
+}
+header.appbar h2{ margin:0; font-weight:700; letter-spacing:.5px; }
+nav ul{ display:flex; gap:.5rem; list-style:none; padding:0; margin:0; }
+nav a{ padding:.4rem .7rem; border-radius:.5rem; text-decoration:none; color:#cbd5e1; }
+nav a:hover{ background:rgba(255,255,255,.06); color:#fff; }
+
+.card{ background:linear-gradient(180deg, #121a33, #0f162d); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1rem; box-shadow:0 20px 50px rgba(0,0,0,.35); }
+.brand{ display:flex; align-items:center; gap:.6rem; }
+.brand img{ width:120px; height:auto; }
+.card + .card{ margin-top:1rem; }
+
+.muted{ color:#a8b3cf; }
+.pill{ display:inline-block; padding:.15rem .5rem; border-radius:999px; font-size:.8rem; background:#0f1b3d; border:1px solid rgba(255,255,255,.08); }
+
+button, .button{ background:var(--brand); border:none; }
+button:hover, .button:hover{ background:var(--brand-2); }
+
+.grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media (max-width: 900px){ .grid-2{ grid-template-columns:1fr; } }
+
+.view{ transition: opacity .25s ease, transform .25s ease; opacity:1; transform: translateY(0); }
+.view.hidden{ opacity:0; transform: translateY(6px); }
+
+.video-wrap{ position:relative; display:inline-block; border-radius:12px; overflow:hidden; }
+.video-wrap canvas{ position:absolute; left:0; top:0; }
+
+ul.matches{ list-style:none; padding:0; margin:0; }
+ul.matches li{ display:flex; align-items:center; justify-content:space-between; padding:.5rem .75rem; border-radius:.6rem; background:#0e1631; border:1px solid rgba(255,255,255,.06); margin-bottom:.5rem; }
+ul.matches li .tag{ font-size:.8rem; color:#9de1b1; }
+
+.status-ok{ color:#22c55e; }
+.status-warn{ color:#f59e0b; }
+.status-bad{ color:#f43f5e; }
+
+input[type="file"]{ background:#0c1531; border:1px dashed rgba(255,255,255,.12); }
+
+.section-title{ display:flex; align-items:center; gap:.5rem; }
+.section-title .pill{ background:#0d1b42; }
+

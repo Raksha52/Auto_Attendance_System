@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student - Auto Attendance</title>
+    <link rel="icon" href="./favicon.svg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="appbar">
+        <div class="brand"><img src="./logo.svg" alt="Auto Attendance" /></div>
+        <nav>
+          <ul>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="card">
+        <div class="section-title"><h3>Student Portal</h3><span class="pill">UI</span></div>
+        <p class="muted">Placeholder: enroll face and view attendance status.</p>
+        <div class="grid-2">
+          <div class="card">
+            <h4>Enroll Face</h4>
+            <button class="button" disabled>Upload Photo</button>
+          </div>
+          <div class="card">
+            <h4>Attendance Status</h4>
+            <button class="button" disabled>Refresh</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module">
+      import { StudentPage } from './app-shared.js';
+      new StudentPage().init();
+    </script>
+  </body>
+</html>
+
+

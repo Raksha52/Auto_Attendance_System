@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<article>
+  <h3>Login</h3>
+  <form method="post">
+    <label>Student ID or Email
+      <input name="student_id" placeholder="Student ID or Email" />
+    </label>
+    <label>Password
+      <input type="password" name="password" />
+    </label>
+    <label>Or OTP
+      <input name="otp" />
+    </label>
+    <button type="submit">Login</button>
+  </form>
+  <form method="post" action="/request-otp">
+    <label>Student ID or Email for OTP
+      <input name="student_id" placeholder="Student ID or Email" />
+    </label>
+    <button type="submit">Request OTP</button>
+  </form>
+</article>
+{% endblock %}
+
